@@ -1,5 +1,67 @@
 ## [4.18.1](https://github.com/unional/type-plus/compare/v4.18.0...v4.18.1) (2022-12-09)
 
+## 6.9.0
+
+### Minor Changes
+
+- e11d43c5: Expose `FindLast` also as `ArrayPlus.FindList`.
+
+  Improved its handling of array.
+
+- 25e5fcb2: add `NumericPlus`
+- ee14247c: Add `ArrayPlus.SplitAt`
+- a49abe20: Mark the following code as deprecated:
+
+  - `isType.t()`
+  - `isType.f()`
+  - `isType.never()`
+
+- 4352d514: Add `StringToNumber`, `StringToBigint`, and `StringToNumeric`
+- e93e366d: Add alternative `Partial<T>` type that works with `exactOptionalPropertyTypes`.
+- 10af3634: Add `ArrayPlus.Reverse<A>`
+- 82ffd7d9: Add `NumericToString`
+- 72aca9d0: Add `MathPlus.ToNegative`
+- 09495bec: Add `ArrayPlus.Entries<A>`.
+- 3e0e199b: Add remaining types to `testType.*`.
+
+  `testType` is changed to a proxy to simplify implementation.
+
+- 65e84c4b: Expose `FindFirst` also as `ArrayPlus.Find`.
+
+  Improved its handling of array.
+
+- d2997ded: Deprecate `Equal` and `NotEqual`. They are renamed to `IsEqual` and `IsNotEqual`.
+
+  `Equal` and `NotEqual` will be changed to `filter` variant (a.k.a. `parse` variant) in the future.
+
+- 7bf5d39e: Add `StrictCanAssign<A,B>` and `testType.strictCanAssign()`
+- 74cc6545: Alias `Some` under `ArrayPlus.Some`.
+
+### Patch Changes
+
+- 84617522: `At` should return `V | undefined` for tuple when `N` is `number` (or `any` which includes `number`).
+- aaffd23e: fix `Some<Array<number | string>, number>` to return `boolean`.
+  This is because besides `Array<number | string>` can be `[1, 'a']`,
+  it can also be:
+
+  ```ts
+  const v: number | string = 123
+
+  const a: Array<number | string> = [v]
+  ```
+
+  So `Some<Array<number | string>, number>` should distribute and return `boolean`.
+
+- 4878eb07: `At` should return `V | undefined` for array.
+- afc1840c: Add `Upper` and `Lower` for `IndexAt`.
+
+  This allow fine-grained control over the `IndexAt` behavior,
+  when the value is out of bounds.
+
+  This is used in cases where out-of-bounds values are coarsen to the upper and lower bound of the subject array.
+
+- d31ea31f: Improve `Abs` to work with `bigint`
+
 ## 6.8.1
 
 ### Patch Changes
